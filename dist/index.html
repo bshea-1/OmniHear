@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniHear - Bidirectional Sign Language Translator</title>
+
+    <!-- Styles: Managed by Vite (imported in src/main.ts) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Required CDNs (Version Locked) -->
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- TensorFlow.js (Core, Converter, Backend WebGL) -->
+    <script src="https://unpkg.com/@tensorflow/tfjs-core@3.7.0/dist/tf-core.js"></script>
+    <script src="https://unpkg.com/@tensorflow/tfjs-converter@3.7.0/dist/tf-converter.js"></script>
+    <script src="https://unpkg.com/@tensorflow/tfjs-backend-webgl@3.7.0/dist/tf-backend-webgl.js"></script>
+
+    <!-- Handpose (Version 0.0.7 for landmarks array compatibility) -->
+    <script src="https://unpkg.com/@tensorflow-models/handpose@0.0.7/dist/handpose.js"></script>
+
+    <!-- Fingerpose -->
+    <script src="https://cdn.jsdelivr.net/npm/fingerpose@0.1.0/dist/fingerpose.min.js"></script>
+
+  <script type="module" crossorigin src="/assets/index-607cd4b0.js"></script>
+  <link rel="stylesheet" href="/assets/index-53176714.css">
+</head>
+
+<body class="bg-gray-900 text-white overflow-hidden">
+
+    <!-- Main Layout -->
+    <div class="flex h-screen w-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col p-4 space-y-6">
+            <div class="text-2xl font-bold text-blue-400">OmniHear</div>
+            <div class="text-xs text-gray-500 uppercase tracking-widest">Speech-to-Sign</div>
+
+            <div class="space-y-4">
+                <!-- Status Indicator -->
+                <div id="status-panel" class="bg-gray-900 p-4 rounded border border-gray-700">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-semibold text-gray-300">Microphone</span>
+                        <div id="mic-status" class="w-3 h-3 rounded-full bg-red-900 transition-colors duration-200">
+                        </div>
+                    </div>
+                    <button id="mic-toggle-btn"
+                        class="w-full bg-blue-600 hover:bg-blue-500 text-white text-xs py-2 rounded transition uppercase font-bold tracking-wide">
+                        Start Listening
+                    </button>
+                </div>
+
+                <div>
+                    <h3 class="text-sm uppercase text-gray-400 font-semibold mb-2">Controls</h3>
+                    <div class="flex flex-col space-y-2">
+                        <button id="reset-btn"
+                            class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded text-sm w-full transition">Reset
+                            Hands</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto">
+                <h3 class="text-sm uppercase text-gray-400 font-semibold mb-2">Transcript</h3>
+                <div id="transcript"
+                    class="h-48 overflow-y-auto text-xs text-green-400 bg-black p-3 rounded border border-gray-700 font-mono leading-relaxed">
+                    System Ready. Use the microphone or type below.
+                </div>
+            </div>
+        </div>
+
+        <!-- content area -->
+        <div class="flex-1 flex flex-col relative">
+            <!-- 3D Canvas -->
+            <div id="canvas-container" class="flex-1 bg-gradient-to-br from-gray-900 to-gray-800 relative">
+                <!-- Chat Overlay (Bottom Center) -->
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-96 max-w-full px-4">
+                    <div class="bg-gray-800 rounded-full shadow-lg flex items-center p-2 border border-gray-600">
+                        <input type="text" id="chat-input" placeholder="Type a sentence..."
+                            class="bg-transparent text-white px-4 py-2 flex-1 outline-none placeholder-gray-500">
+                        <button id="chat-btn"
+                            class="bg-blue-600 hover:bg-blue-500 text-white rounded-full p-2 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Script -->
+    
+</body>
+
+</html>

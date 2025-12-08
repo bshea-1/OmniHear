@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar for Transcript */
+#transcript::-webkit-scrollbar {
+    width: 6px;
+}
+
+#transcript::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+#transcript::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 3px;
+}
+
+#transcript::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Ensure canvas takes full remaining space */
+#canvas-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    outline: none;
+}
+
+#chat-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    height: 50px;
+    display: flex;
+    gap: 10px;
+    z-index: 40;
+}
+
+#chat-input {
+    flex-grow: 1;
+    padding: 0 15px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #444;
+    color: white;
+    outline: none;
+}
+
+#chat-input:focus {
+    border-color: #3b82f6;
+}
+
+#chat-btn {
+    padding: 0 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    background: #2563eb;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#chat-btn:hover {
+    background: #1d4ed8;
+}
